@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Klinik Sehat Sentosa - Antrian Online</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    .navbar {
+      background-color: #1f2cb5;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+        /* Efek hover untuk elemen menu */
+    .nav-links a:hover,
+    .mobile-menu a:hover {
+    color: #20bc78ce;
+    text-decoration: underline;
+    transition: color 0.3s, text-decoration 0.3s;
+    }
+
+    .nav-links a:hover, .nav-links button:hover {
+      color: #20bc78ce;
+    }
+
+    /* Efek hover untuk section layanan */
+    #layanan:hover {
+    background-color: #e0f7fa;
+    transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Efek hover untuk section tentang */
+    #tentang:hover {
+    background-color: #f0f8ff;
+    transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Efek hover untuk section kontak */
+    #kontak:hover {
+    background-color: #d0e9f0;
+    transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Efek hover untuk section antrian */
+    #antrian:hover {
+    background-color: #b3ebf2;
+    transition: background-color 0.3s ease-in-out;
+    }
+
+
+    .nav-links a, .nav-links button {
+      color: white;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      font-size: 2rem;
+      position: absolute;
+      right: 20px; 
+      top: 1.5px;
+    }
+
+    /* Mobile Menu Dropdown */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 4rem;
+      right: 2rem;
+      background-color: #0077b6;
+      padding: 1rem;
+      border-radius: 5px;
+      text-align: center;
+      width: 200px;
+    }
+
+    .mobile-menu a {
+      display: block;
+      margin: 0.5rem 0;
+      color: white;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1588776814546-d7b6f46979f6?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+      color: rgb(0, 0, 0);
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(to bottom right, #00aaff,#6c96ab, #00ffaa);
+    }
+
+    .hero-content {
+      background-color: rgba(64, 72, 88, 0.5);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 600px;
+    }
+
+    .hero button {
+      margin-top: rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      background-color: #00b4d8;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+      
+    }
+    .layanan-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      margin-top:12 rem;
+      
+    }
+
+    .card {
+      background-color: rgb(175, 171, 183);
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 250px;
+      box-shadow: 6px 5px 3px rgba(10, 10, 10, 0.1);
+    }
+
+    .kami{
+      background-color: rgb(175, 171, 183);
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 100%;
+      box-shadow: 6px 5px 3px rgba(10, 10, 10, 0.1);
+    }
+
+    .kontak {
+  background-color: #d8eefe; /* Tambahan ini */
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.kontak form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+    .kontak input, .kontak textarea {
+      padding: 0.8rem;
+      border: 1.5px solid #ccc;
+      border-radius: 7px;
+    }
+    
+        .hero .btn {
+    margin-top: 20px;
+    display: inline-block;
+    background: rgb(75, 175, 209);
+    color: #ffffff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold; 
+    }
+
+    .hero .btn:hover { background: rgb(46, 54, 161); 
+
+    }
+
+    .kontak button {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #antrian {
+      background-color: #e0f7fa;
+      padding: 4rem 2rem;
+      display: none;
+    }
+
+    #formAntrian {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+      margin: 2rem auto;
+    }
+
+    #formAntrian input,
+    #formAntrian select,
+    #formAntrian button {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #formAntrian button {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 18px;
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+    }
+
+
+    .close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .modal-content button {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #1d86be;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .Daftar {
+      position: absolute;
+      top: 20px;
+      right: 60px;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .Daftar a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      transition: color 0.3s ease, background-color 0.3s ease;
+    }
+    @media (max-width: 412px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .hamburger {
+        display: block;
+      }
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 4rem;
+        right: 2rem;
+        background-color: #57656b;
+        padding: 1rem;
+        border-radius: 20px;
+      }
+
+      .mobile-menu a {
+        display: block;
+        margin: 0.5rem 0;
+        color: white;
+      }
+
+      .hero {
+        padding: 3rem 1rem;
+        min-height: auto;
+      }
+
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .layanan-list {
+        flex-direction: column;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+      }
+
+      .kontak form {
+        padding: 0 1rem;
+        width: 100%;
+      }
+
+      .modal-content {
+        margin-top: 30%;
+        width: 90%;
+      }
+
+      .navbar h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero button {
+        padding: 1rem 2rem;
+      }
+
+      #formAntrian input,
+      #formAntrian select,
+      #formAntrian button {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+ <header>
+  
+  <nav class="navbar">
+    <div class="logo"><img src="gambar (2).png" width="50px" >Klinik Sehat</div>
+    <!-- Ubah ikon hamburger menjadi titik tiga -->
+    <div class="hamburger" onclick="toggleMenu()">&#8942;</div>
+    <ul class="nav-links">
+      <li><a href="#antrian">Antrian</a></li>
+      <li><a href="#layanan">Layanan</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#antrian">Antrian</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#tentang">Tentang</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+  </nav>
+</header>
+
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Selamat Datang di Klinik Sehat</h2>
+      <p>Silahkan daftar dahulu</p>
+      <a href="../daftar/daftar.html" class="btn">Daftar</a>
+    </div>
+  </section>
+
+  <section id="layanan" class="layan">
+    <h3>Layanan Kami</h3>
+    <div class="layanan-list">
+      <div class="card"><h4>Dokter Umum</h4><p>Konsultasi cepat dan nyaman.</p></div>
+      <div class="card"><h4>Laboratorium</h4><p>Hasil tes cepat dan akurat.</p></div>
+      <div class="card"><h4>Vaksinasi</h4><p>Aman dan terpercaya.</p></div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <div class="tentang">
+    <h3>Tentang Kami</h3>
+    <div class="kami"><p>sejak 2010 dengan layanan kesehatan berkualitas dan sistem antrian modern untuk kenyamanan pasien.</p> </div> 
+  </div>
+  </section>
+
+  <section id="kontak" class="kontak">
+    <h3>Kontak Kami</h3>
+    <form id="formKontak">
+      <input type="text" placeholder="Nama Anda" required />
+      <input type="email" placeholder="Email" required />
+      <textarea placeholder="Pesan Anda" required></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+  </section>
+
+  <section id="antrian">
+    <h3>Form Antrian</h3>
+    <form id="formAntrian">
+      <input type="text" placeholder="Nama Lengkap" required />
+      <input type="text" placeholder="Nomor Telepon" required />
+      <select required>
+        <option value="">Pilih Layanan</option>
+        <option value="umum">Dokter Umum</option>
+        <option value="lab">Laboratorium</option>
+        <option value="vaksin">Vaksinasi</option>
+      </select>
+      <input type="date" required />
+      <button type="submit">Ambil Antrian</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Klinik Sehat</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
